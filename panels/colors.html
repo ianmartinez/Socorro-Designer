@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Socorro IDE</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Tamarack CSS -->
+    <link href="../tamarack/TamarackStyle.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../bootstrap/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../bootstrap/js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Spectrum -->
+    <link rel='stylesheet' href='../ui/spectrum_color/spectrum.css' />
+    <link href="../css/style.css" rel="stylesheet">
+  </head>
+  <body class="transparent_panel">
+    <div class="fill">
+      <input type='text' id='color_ui' class="fill"/>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../js/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="bootstrap/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../bootstrap/js/ie10-viewport-bug-workaround.js"></script>  
+
+    <!-- Tamarack -->
+    <script src="../tamarack/TamarackCore.js"></script>
+    <script src="../tamarack/TamarackUI.js"></script>
+
+    <!-- Spectrum -->
+    <script src='../ui/spectrum_color/spectrum.js'></script>
+
+    <script>
+      $("#color_ui").spectrum({
+        flat: true, 
+        showAlpha: true,  showPalette: true,
+        showButtons: false,
+        palette: [
+            // Main Palette
+            ['#ef2929','#fcaf3e', '#fce94f', 'rgb(202, 235, 44)' , '#8ae234', '#729fcf', '#ad7fa8', 'rgb(245, 83, 255)', '#e9b96e', '#888a85', '#eeeeec', 'rgba(0,0,0,0)', 'rgba(255,255,255,0)'],
+            ['#cc0000','#f57900', '#edd400', 'rgb(181, 215, 21)' , , '#73d216', '#3465a4', '#75507b', 'rgb(193, 34, 204)', '#c17d11', '#555753', '#d3d7cf', 'rgba(0,0,0,0.25)', 'rgba(255,255,255,0.25)'],
+            ['#a40000','#ce5c00', '#c4a000', 'rgb(129, 154, 6)'  , '#4e9a06', '#204a87', '#5c3566', 'rgb(133, 0, 141)', '#8f5902', '#2e3436', '#babdb6', 'rgba(0,0,0,0.5)', 'rgba(255,255,255,0.5)'],
+            ['#000000','#2e3436', '#555753', 'rgb(107, 109, 105)', '#888a85', '#babdb6', '#d3d7cf', 'rgb(227, 229, 226)','#eeeeec', '#f3f3f3', '#ffffff', 'rgba(0,0,0,0.75)', 'rgba(255,255,255,0.75)'],
+            
+            // Extended Palette
+            ['#F8B195','#F67280','#c06c84','#6c5b7b','#355c7d','#a9216b','#ed1b4c','#f26a44','#f6db68','#2e9699','#007f97','rgba(97, 151, 213, 0.29)','rgba(246, 144, 60, 0.29)'],
+            ['#9ab999','#fcceaa','#f4837d','#eb4960','#27363b','#eee7c3','#ece674','#f7d420','#f6903c','#f04f54','#a4bcbc','rgba(97, 151, 213, 0.73)','rgba(246, 144, 60, 0.73)']
+        ],
+        showInput: true
+      });
+    </script>
+  </body>
+</html>

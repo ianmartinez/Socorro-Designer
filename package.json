@@ -1,0 +1,5 @@
+{
+  "name"    : "Socorro IDE",
+  "version" : "0.2.0",
+  "main"    : "electron_init.js"
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Socorro IDE</title>
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Tamarack CSS -->
+    <link href="tamarack/TamarackStyle.css" rel="stylesheet">
+
+    <!-- Golden Layout-->
+    <link type="text/css" rel="stylesheet" href="ui/golden_layout/goldenlayout-base.css" />
+    <link type="text/css" rel="stylesheet" href="ui/golden_layout/goldenlayout-dark-theme.css" />
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="bootstrap/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="bootstrap/js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <link href="css/style.css" rel="stylesheet">
+    
+  </head>
+ 
+  <body class="padded">
+    <!-- Bootstrap core JavaScript -->
+    <script src="js/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="bootstrap/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>  
+
+    <!-- Tamarack -->
+    <script src="tamarack/TamarackCore.js"></script>
+    <script src="tamarack/TamarackUI.js"></script>
+
+    <!-- Golden Layout -->
+    <script type="text/javascript" src="ui/golden_layout/goldenlayout.min.js"></script>
+
+    <!-- Socorro API -->
+    <script src="internal_api/socorro_api.js"></script>
+
+    <script>
+    // Set global objects
+    const {app} = require('electron');
+    var fs = require('fs');
+    const {clipboard} = require('electron');
+    const {dialog} = require('electron');
+    const {shell} = require('electron');
+
+    // The Electron apis that can be called 
+    const e = new ElectronApi(app,fs,clipboard,dialog,shell);
+    // The build options for the current project 
+    var build_options = new SocorroBuildOptions();
+    // The current project
+    var project = new SocorroProject("D:/Socorro IDE/",build_options);
+    // The state, containing the project and all the functions needed to modify it
+    var state = new SocorroState(project,"",e);
+
+    // Init layout
+    var config = {
+        content: [{
+            type: 'row',
+            content:[{
+                    type: 'stack', // Stack
+                    content: [
+                        {
+                            type:'component',
+                            componentName: 'start_page',
+                            title: 'Start Page'    
+                        },
+                        {
+                            type:'component',
+                            componentName: 'editor_ui',
+                            title: 'Editor'    
+                        }
+                    ]
+                },{
+                type: 'column',
+                    width: 28,
+                content:[{
+                    type: 'component',
+                    height: 65,
+                    componentName: 'color_ui',
+                    title: 'Palette'       
+                },{
+                    type: 'component',
+                    componentName: 'project_ui',
+                    title: 'Project'           
+                }]
+            }]
+        }]
+    };
+    var myLayout = new GoldenLayout( config );
+    /*
+
+    var myLayout,
+        savedState = localStorage.getItem( 'savedState' );
+
+    if( savedState !== null ) {
+        myLayout = new GoldenLayout( JSON.parse( savedState ) );
+    } else {
+        myLayout = new GoldenLayout( config );
+    }
+
+    myLayout.on( 'stateChanged', function(){
+        var state = JSON.stringify( myLayout.toConfig() );
+        localStorage.setItem( 'savedState', state );
+    });
+
+    var persistentComponent = function( container, state ){
+
+        //Check for localStorage
+        if( !typeof window.localStorage ) {
+        container.getElement().append(  '<h2 class="err">Your browser doesn\'t support localStorage.</h2>');
+        return;
+        }
+    };*/
+
+    myLayout.registerComponent( 'testComponent', function (container, state ){
+                
+    });   
+    myLayout.registerComponent( 'start_page', function (container, state ){
+                var startPage = $( '<iframe class="screen_display" src="screens/start.html">' );
+        container.getElement().append(startPage);
+    }); 
+    myLayout.registerComponent( 'color_ui', function (container, state ){
+                var startPage = $( '<iframe class="fill" src="panels/colors.html">' );
+        container.getElement().append(startPage);
+    }); 
+    myLayout.registerComponent( 'project_ui', function (container, state ){
+                var startPage = $( '<iframe class="fill" src="panels/project.html">' );
+        container.getElement().append(startPage);
+    }); 
+    myLayout.registerComponent( 'editor_ui', function (container, state ){
+                var startPage = $( '<iframe class="fill" src="screens/editor.html">' );
+        container.getElement().append(startPage);
+    }); 
+    myLayout.init();
+    </script>
+  </body>
+</html>

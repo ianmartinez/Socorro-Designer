@@ -1,0 +1,42 @@
+<div id="jstree">
+  </div>
+<button id="sam">create node</button>
+
+$(function () {
+    var data = [
+       { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+       { "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+       { "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
+       { "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },
+    ];
+   $("#jstree").jstree({
+     "core" : {
+       // so that create works
+       "check_callback" : true,
+        
+        "data": data
+     },
+    "plugins" : [ "contextmenu",  "dnd"],
+        
+        "contextmenu":{         
+                        "items": {
+                            "create": {
+                                "label": "Add",
+                                "action": function (obj) {
+                                    $('#jstree').jstree().create_node('#' ,  { "id" : "ajson5", "text" : "newly added" }, "last", function(){
+    alert("done");
+ }); 
+},
+                            }
+                        }
+        }
+        
+  }).on('create_node.jstree', function(e, data) {
+    console.log('saved');
+});
+$("#sam").on("click",function() {
+     $('#jstree').jstree().create_node('#' ,  { "id" : "ajson5", "text" : "newly added" }, "last", function(){
+    alert("done");
+ });
+});
+});
