@@ -54,102 +54,78 @@
     <script src="internal_api/socorro_api.js"></script>
 
     <script>
-    // Set global objects
-    const {app} = require('electron');
-    var fs = require('fs');
-    const {clipboard} = require('electron');
-    const {dialog} = require('electron');
-    const {shell} = require('electron');
+        // Set global objects
+        const {app} = require('electron');
+        var fs = require('fs');
+        const {clipboard} = require('electron');
+        const {dialog} = require('electron');
+        const {shell} = require('electron');
 
-    // The Electron apis that can be called 
-    const e = new ElectronApi(app,fs,clipboard,dialog,shell);
-    // The build options for the current project 
-    var build_options = new SocorroBuildOptions();
-    // The current project
-    var project = new SocorroProject("D:/Socorro IDE/",build_options);
-    // The state, containing the project and all the functions needed to modify it
-    var state = new SocorroState(project,"",e);
+        // The Electron apis that can be called 
+        const e = new ElectronApi(app,fs,clipboard,dialog,shell);
+        // The build options for the current project 
+        var build_options = new SocorroBuildOptions();
+        // The current project
+        var project = new SocorroProject("D:/Socorro IDE/",build_options);
+        // The state, containing the project and all the functions needed to modify it
+        var state = new SocorroState(project,"solarized_dark",e);
 
-    // Init layout
-    var config = {
-        content: [{
-            type: 'row',
-            content:[{
-                    type: 'stack', // Stack
-                    content: [
-                        {
-                            type:'component',
-                            componentName: 'start_page',
-                            title: 'Start Page'    
-                        },
-                        {
-                            type:'component',
-                            componentName: 'editor_ui',
-                            title: 'Editor'    
-                        }
-                    ]
-                },{
-                type: 'column',
-                    width: 28,
+        // Init layout
+        var config = {
+            content: [{
+                type: 'row',
                 content:[{
-                    type: 'component',
-                    height: 65,
-                    componentName: 'color_ui',
-                    title: 'Palette'       
-                },{
-                    type: 'component',
-                    componentName: 'project_ui',
-                    title: 'Project'           
+                        type: 'stack', // Stack
+                        content: [
+                            {
+                                type:'component',
+                                componentName: 'start_page',
+                                title: 'Start Page'    
+                            },
+                            {
+                                type:'component',
+                                componentName: 'editor_ui',
+                                title: 'Editor'    
+                            }
+                        ]
+                    },{
+                    type: 'column',
+                        width: 28,
+                    content:[{
+                        type: 'component',
+                        height: 65,
+                        componentName: 'color_ui',
+                        title: 'Palette'       
+                    },{
+                        type: 'component',
+                        componentName: 'project_ui',
+                        title: 'Project'           
+                    }]
                 }]
             }]
-        }]
-    };
-    var myLayout = new GoldenLayout( config );
-    /*
+        };
+        var myLayout = new GoldenLayout( config );
 
-    var myLayout,
-        savedState = localStorage.getItem( 'savedState' );
-
-    if( savedState !== null ) {
-        myLayout = new GoldenLayout( JSON.parse( savedState ) );
-    } else {
-        myLayout = new GoldenLayout( config );
-    }
-
-    myLayout.on( 'stateChanged', function(){
-        var state = JSON.stringify( myLayout.toConfig() );
-        localStorage.setItem( 'savedState', state );
-    });
-
-    var persistentComponent = function( container, state ){
-
-        //Check for localStorage
-        if( !typeof window.localStorage ) {
-        container.getElement().append(  '<h2 class="err">Your browser doesn\'t support localStorage.</h2>');
-        return;
-        }
-    };*/
-
-    myLayout.registerComponent( 'testComponent', function (container, state ){
-                
-    });   
-    myLayout.registerComponent( 'start_page', function (container, state ){
-                var startPage = $( '<iframe class="screen_display" src="screens/start.html">' );
-        container.getElement().append(startPage);
-    }); 
-    myLayout.registerComponent( 'color_ui', function (container, state ){
-                var startPage = $( '<iframe class="fill" src="panels/colors.html">' );
-        container.getElement().append(startPage);
-    }); 
-    myLayout.registerComponent( 'project_ui', function (container, state ){
-                var startPage = $( '<iframe class="fill" src="panels/project.html">' );
-        container.getElement().append(startPage);
-    }); 
-    myLayout.registerComponent( 'editor_ui', function (container, state ){
-                var startPage = $( '<iframe class="fill" src="screens/editor.html">' );
-        container.getElement().append(startPage);
-    }); 
-    myLayout.init();
+        myLayout.registerComponent( 'testComponent', (container, state) => {
+                    
+        });   
+        myLayout.registerComponent( 'start_page', (container, state) => {
+            var startPage = $('<iframe class="screen_display" src="screens/start.html">');
+            container.getElement().append(startPage);
+        }); 
+        myLayout.registerComponent( 'color_ui', (container, state) => {
+            var startPage = $('<iframe class="fill" src="panels/colors.html">');
+            container.getElement().append(startPage);
+        }); 
+        myLayout.registerComponent( 'project_ui', (container, state) => {
+            var startPage = $('<iframe class="fill" src="panels/project.html">');
+            container.getElement().append(startPage);
+        }); 
+        myLayout.registerComponent( 'editor_ui', (container, state) => {
+            var startPage = $('<iframe class="fill" src="screens/editor.html">');
+            container.getElement().append(startPage);
+        }); 
+        myLayout.init();
     </script>
   </body>
 </html>

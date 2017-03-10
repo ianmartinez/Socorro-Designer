@@ -1,15 +1,17 @@
 var current_editor;
 class scCodeEditor extends tkControl
 {
-    constructor(_editor_id,_associated_file,_e)
+    constructor(_editor_id,_state,_associated_file)
     {
         super(_editor_id);
 
         this.editorId = _editor_id;
         this.editor = ace.edit(_editor_id);
-        this.editor.setTheme("ace/theme/solarized_light");
         this.editor.$blockScrolling = Infinity;
         this.modified = false;
+        this.editor.setOption("showPrintMargin", false);
+        this.state = _state;
+        this.setTheme(this.state.theme);
 
         // File to read from and save to
         this.associated_file = _associated_file;
@@ -19,11 +21,15 @@ class scCodeEditor extends tkControl
             var split_dot = _associated_file.split(".");
             this.ext = split_dot[split_dot.length -1];
             this.setExt(this.ext);
-            
-            this.e = _e;
         }
+
+        this.e = _state.e;
     }
 
+    setTheme(_theme) {
+        this.editor.setTheme("ace/theme/" + _theme);
+    }
+    
     initText() {
         this.readFile(this.associated_file);
     }

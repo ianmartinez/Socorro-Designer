@@ -27,11 +27,7 @@ class SocorroState {
     constructor(_project,_theme,_e) {
         this.project = _project;
         this.e = _e;
-        this._theme = _theme;
-    }
-
-    set theme(_theme_name) {
-
+        this.theme = _theme;
     }
 }
 
