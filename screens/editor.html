@@ -50,14 +50,14 @@
     <script src="editor.js"></script>
 
     
-    <!-- Init Editors -->
+    <!-- Init Editor -->
     <script>
         // global state object 
         var state = parent.state;
+        var loc = GetParameter("loc").toString();
 
-        // HTML Code
-        var html_code_editor = new scCodeEditor("html_code",state,"index.html");
-        html_code_editor.initText();
+        var code_editor = new scCodeEditor("code",state,loc);
+        code_editor.initText();
     </script>
   </body>
 </html>

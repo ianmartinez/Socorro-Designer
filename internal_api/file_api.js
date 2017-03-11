@@ -6,20 +6,29 @@ class scFileTree {
     }
 
     startTree() {
-        return this.buildTree(this.path,null);
+        this.tree =  this.buildTree(this.path,null);
     }
     
     buildTree(_path,_parent_path) {
         var file_list = this.enumerateFiles(_path);
         file_list = this.sortPathList(file_list);
         var nodes = [];
-        //alert(_path+"   "+_parent_node);
         for(var i=0;i<file_list.length;i++) {
-            nodes.push(this.createNode(file_list[i],_parent_path));
-            if(this.isDirectory(file_list[i].location)) {
-                nodes = nodes.concat(this.buildTree(file_list[i].location,file_list[i]));
-            }
+            var cur = file_list[i];
+            cur.parent_id = (_parent_path!=null) ? _parent_path.id : null;
+            nodes.push(cur);
+
+            if (cur.is_folder)
+                nodes = nodes.concat(this.buildTree(cur.location,cur));
         }
+
+        return nodes;
+    }
+
+    walkTree() {
+        var nodes = [];
+        for(var i =0;i<this.tree.length;i++) 
+            nodes.push(this.createNode(this.tree[i]));
 
         return nodes;
     }
@@ -31,11 +40,11 @@ class scFileTree {
 
     findPath(_id) {
         for(var i=0;i<this.tree.length;i++) 
-            if (this.tree[i] == _id) 
+            if (this.tree[i].id == _id) 
                 return this.tree[i];
     }
 
-    createNode(_path, _parent_path) {
+    createNode(_path) {
         var icon = "../icons/breeze/mimetypes/32/application-x-zerosize.svg";
         switch (_path.ext) {
             // plain folder
@@ -142,10 +151,8 @@ class scFileTree {
                 icon = "../icons/breeze/mimetypes/32/urgent-file.svg";
         }
         
-       // console.log("Node: " + _path.id + " " + _path + " " + _parent_path + "\n" + _path.getData() + "\n") ;
-        if(_parent_path != null) {
-           //console.log("!!!!!!!!!!" + _parent_path.getData());
-            return {"id" : _path.id, "text" : _path.name, "icon": icon, "parent": _parent_path.id};
+        if(_path.parent_id != null) {
+            return {"id" : _path.id, "text" : _path.name, "icon": icon, "parent": _path.parent_id};
         }
         else
             return {"id" : _path.id, "text" : _path.name, "icon": icon, "parent": "#"};
@@ -192,14 +199,17 @@ class scFileTree {
 
 var id_list = [];
 class Path {
-    constructor(_location,_name,_is_folder) {
+    constructor(_location,_name,_is_folder,_id,_parent_id) {
         this.location = _location;
         this.name = _name;
         this.is_folder = _is_folder;
-        this.id = this.makeId();
+        this.id = (_id == null) ? this.makeId() : this.id = _id;
+        this.parent_id = _parent_id;
+        this.is_editable = true;
 
         if (this.is_folder) {
             this.ext = "folder";
+            this.is_editable = false;
             switch (this.name.toLowerCase()) {
                 case "css":
                     this.ext = "css_folder";
@@ -285,6 +295,7 @@ class Path {
                     this.ext = "readme_file";
             }
         }
+
     }
 
     outData() {
@@ -296,7 +307,7 @@ class Path {
     }
     
     randId() {
-        return Math.floor((Math.random() * 1000000) + 1) +"id";
+        return "node_" + Math.floor((Math.random() * 1000000) + 1);
     }
 
     makeId() {

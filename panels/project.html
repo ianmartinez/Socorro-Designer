@@ -58,18 +58,29 @@
         // global state object 
         var state = parent.state;
 
-$(function () {
-   var tree = new scFileTree(state.e.files,"D:/Socorro IDE");
-   var data = (tree.startTree());
-   $("#project_tree").jstree({
-     "core" : {
-        // so that create works
-        "check_callback" : false,
-        'data': data
-     }
-  }).on('create_node.jstree', function(e, data) {
-});
-});
+        $(function () {
+          var file_tree = new scFileTree(state.e.files,"D:/Socorro IDE");
+          file_tree.startTree();
+          var data = file_tree.walkTree();
+          $("#project_tree").jstree({
+            "core" : {
+              // so that create works
+              "check_callback" : false,
+              'data': data
+            }
+          }).on('dblclick.jstree', function(e) {
+              // open the file in a new tab on double click
+              var current_node = $('#project_tree').jstree('get_selected');
+              var current_path = file_tree.findPath(current_node);
+              if (current_path.is_editable) 
+                state.openFile(current_path.location,current_path.name,current_path.id);
+              
+          })
+          .on("select_node.jstree", function (e, data) { 
+            // change selected node in the project
+            state.project.selected_node = data.node.id;
+          });
+        });
     </script>
   </body>
 </html>

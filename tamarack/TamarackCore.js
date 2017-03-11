@@ -23,9 +23,7 @@ function AddParameters(_url,_args,_vals) {
 function GetParameterFromURL(name, url) 
 {
 	if (!url) 
-	{
 		url = window.location.href;
-	}
 	name = name.replace(/[\[\]]/g, "\\$&");
 	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
 		results = regex.exec(url);
@@ -37,6 +35,11 @@ function GetParameterFromURL(name, url)
 function GetParameter(name) {
 	return GetParameterFromURL(name,GetUrl());
 }
+
+function GetParameterDoc(name) {
+	return GetParameterFromURL(name,document.URL.href);
+}
+	
 			
 function GetUrl()
 {

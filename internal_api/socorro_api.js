@@ -28,6 +28,22 @@ class SocorroState {
         this.project = _project;
         this.e = _e;
         this.theme = _theme;
+        this.layout = "";
+    }
+
+    openFile(_path,_name,_id) {
+        myLayout.registerComponent( 'editor_file_ui_'+_id, function (container, state) {
+            var startPage = $('<iframe class="fill" src="screens/editor.html?loc=' + _path +'">');
+            container.getElement().append(startPage);
+        }); 
+        var editor = this.layout.root.getItemsById('editor_main')[0];
+        var newEditor = {
+            title: _name,
+            id: _id,
+            type: 'component',
+            componentName: 'editor_file_ui_'+_id,
+        };
+        editor.addChild(newEditor);
     }
 }
 
@@ -38,7 +54,9 @@ class SocorroProject {
         this.variables = [];
         this.favicon = "favicon.ico";
         this.apple_icon = "apple-touch-icon.png";
+        this.selected_node = "";
     }
+
     // variables
     addVariable(_key,_value) {
         this.variables.push(new SocorroVariable(_key,_value));

@@ -68,24 +68,20 @@
         // The current project
         var project = new SocorroProject("D:/Socorro IDE/",build_options);
         // The state, containing the project and all the functions needed to modify it
-        var state = new SocorroState(project,"solarized_dark",e);
+        var state = new SocorroState(project,"solarized_light",e);
 
         // Init layout
         var config = {
             content: [{
                 type: 'row',
                 content:[{
-                        type: 'stack', // Stack
+                        type: 'stack',
+                        id: "editor_main",
                         content: [
                             {
                                 type:'component',
                                 componentName: 'start_page',
                                 title: 'Start Page'    
-                            },
-                            {
-                                type:'component',
-                                componentName: 'editor_ui',
-                                title: 'Editor'    
                             }
                         ]
                     },{
@@ -99,33 +95,30 @@
                     },{
                         type: 'component',
                         componentName: 'project_ui',
-                        title: 'Project'           
+                        title: 'Project'  
                     }]
                 }]
             }]
         };
         var myLayout = new GoldenLayout( config );
 
-        myLayout.registerComponent( 'testComponent', (container, state) => {
+        myLayout.registerComponent( 'testComponent', function (container, state) {
                     
         });   
-        myLayout.registerComponent( 'start_page', (container, state) => {
+        myLayout.registerComponent( 'start_page', function (container, state) {
             var startPage = $('<iframe class="screen_display" src="screens/start.html">');
             container.getElement().append(startPage);
         }); 
-        myLayout.registerComponent( 'color_ui', (container, state) => {
+        myLayout.registerComponent( 'color_ui', function (container, state) {
             var startPage = $('<iframe class="fill" src="panels/colors.html">');
             container.getElement().append(startPage);
         }); 
-        myLayout.registerComponent( 'project_ui', (container, state) => {
+        myLayout.registerComponent( 'project_ui', function (container, state) {
             var startPage = $('<iframe class="fill" src="panels/project.html">');
             container.getElement().append(startPage);
         }); 
-        myLayout.registerComponent( 'editor_ui', (container, state) => {
-            var startPage = $('<iframe class="fill" src="screens/editor.html">');
-            container.getElement().append(startPage);
-        }); 
         myLayout.init();
+        state.layout = myLayout;
     </script>
   </body>
 </html>
