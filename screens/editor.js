@@ -1,4 +1,5 @@
 var current_editor;
+const version = ".22";
 class scCodeEditor extends tkControl
 {
     constructor(_editor_id,_state,_associated_file)

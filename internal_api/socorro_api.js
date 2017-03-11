@@ -23,12 +23,14 @@ function insertAt(arr,pos,item) {
     return new_arr;
 }
 
+const sc_version = ".22";
 class SocorroState {
     constructor(_project,_theme,_e) {
         this.project = _project;
         this.e = _e;
         this.theme = _theme;
         this.layout = "";
+        this.version = sc_version;
     }
 
     openFile(_path,_name,_id) {

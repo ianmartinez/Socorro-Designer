@@ -42,7 +42,7 @@
         </nav>
       <div class="container">    
         <img class="imgLogo" src="../Logo.png" style="float:left;"/>    
-        <h1 class="brand_name">Socorro .22</h1>
+        <h1 class="brand_name" id="brand_name">Socorro</h1>
       </div>
     </div>
 
@@ -110,5 +110,11 @@
     <!-- Tamarack -->
     <script src="../tamarack/TamarackCore.js"></script>
     <script src="../tamarack/TamarackUI.js"></script>
+    <script>
+        // global state object 
+        var state = parent.state;
+
+      $("#brand_name").text("Socorro " + state.version);
+    </script>
   </body>
 </html>
