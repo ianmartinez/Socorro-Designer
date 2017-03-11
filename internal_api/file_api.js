@@ -14,12 +14,12 @@ class scFileTree {
         file_list = this.sortPathList(file_list);
         var nodes = [];
         for(var i=0;i<file_list.length;i++) {
-            var cur = file_list[i];
-            cur.parent_id = (_parent_path!=null) ? _parent_path.id : null;
-            nodes.push(cur);
+            var current_path = file_list[i];
+            current_path.parent_id = (_parent_path!= null) ? _parent_path.id : null;
+            nodes.push(current_path);
 
-            if (cur.is_folder)
-                nodes = nodes.concat(this.buildTree(cur.location,cur));
+            if (current_path.is_folder)
+                nodes = nodes.concat(this.buildTree(current_path.location,current_path));
         }
 
         return nodes;
@@ -29,7 +29,6 @@ class scFileTree {
         var nodes = [];
         for(var i =0;i<this.tree.length;i++) 
             nodes.push(this.createNode(this.tree[i]));
-
         return nodes;
     }
 
@@ -132,6 +131,7 @@ class scFileTree {
             case "bat":
             case "sh":
                 icon = "../icons/breeze/apps/32/utilities-terminal.svg";
+                break;
             case "exe":
                 icon = "../icons/breeze/mimetypes/32/application-x-executable.svg";
                 break;
@@ -166,15 +166,6 @@ class scFileTree {
         return files;
     }
 
-    
-    comparePath(a,b) {
-        if (a.name<b.name)
-                 return -1;
-        if (a.name>b.name) 
-            return 1;
-        return 0;
-    }
-
     sortPathList(_paths) {
         var folders = [];
         var files = [];
@@ -190,6 +181,14 @@ class scFileTree {
         files = this.sortAlpha(files);
 
         return folders.concat(files);
+    }
+
+    comparePath(a,b) {
+        if (a.name<b.name)
+                 return -1;
+        if (a.name>b.name) 
+            return 1;
+        return 0;
     }
 
     sortAlpha(_paths) {
@@ -248,7 +247,7 @@ class Path {
                     this.ext = "sound_folder";
                     break;
                 case "temp":
-                    this.ext = "temp_folder"
+                    this.ext = "temp_folder";
                     break;
                 case "template":
                     this.ext = "template_folder";
@@ -297,17 +296,9 @@ class Path {
         }
 
     }
-
-    outData() {
-        console.log(this.getData());
-    }
-
-    getData() {
-        return ("Path: " + this.location + " " + this.name + " " + this.is_folder + " " + this.id);
-    }
     
     randId() {
-        return "node_" + Math.floor((Math.random() * 1000000) + 1);
+        return "path_" + Math.floor((Math.random() * 1000000) + 1);
     }
 
     makeId() {

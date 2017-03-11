@@ -1,5 +1,5 @@
 function isArray(test) {
-    return (test.constructor === Array);
+    return (test.constructor == Array);
 }
 
 function copyArr(arr) {
@@ -11,10 +11,6 @@ function copyArr(arr) {
 
 function removeAt(arr,pos) {
    return arr.slice(0, pos) + arr.slice(pos+1);
-}
-
-function removeThru(arr,start,end) {
-    return arr.splice(start,end);
 }
 
 function insertAt(arr,pos,item) {
@@ -55,7 +51,7 @@ class SocorroState {
 
             //  Find out if an editor is already open
             var editor_count = this.layout.root.getItemsById(this.getEditorId(_id)).length;
-            if (editor_count == 0) {
+            if (editor_count === 0) {
                 var editor = this.layout.root.getItemsById('editor_main')[0];
                 var newEditor = {
                     title: _name,
@@ -82,14 +78,13 @@ class SocorroProject {
         this.selected_node = "";
     }
 
-    // variables
     addVariable(_key,_value) {
         this.variables.push(new SocorroVariable(_key,_value));
     }
 
     removeVariable(_key) {
         this.variables.forEach((item, i) => {
-            if (item.key =- _key) 
+            if (item.key == _key) 
                 this.variables = removeAt(this.variables,i);
         });
     }

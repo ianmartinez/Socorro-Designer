@@ -67,6 +67,10 @@ class scCodeEditor extends tkControl
             this.editor.session.setMode("ace/mode/ini");
         else if (ext == "json")
             this.editor.session.setMode("ace/mode/json");
+        else if (ext == "bat")
+            this.editor.session.setMode("ace/mode/batchfile");
+        else if (ext == "sh")
+            this.editor.session.setMode("ace/mode/sh");
         else
             this.editor.session.setMode("ace/mode/plain_text");
     }
