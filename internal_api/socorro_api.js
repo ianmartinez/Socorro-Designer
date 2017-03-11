@@ -43,24 +43,33 @@ class SocorroState {
     }
 
     openFile(_path,_name,_id) {
-        try {
-            this.layout.registerComponent(this.getEditorName(_id), function (container, state) {
-                var startPage = $('<iframe class="fill" src="screens/editor.html?loc=' + _path +'">');
-                container.getElement().append(startPage);
-            }); 
-            var editor = this.layout.root.getItemsById('editor_main')[0];
-            var newEditor = {
-                title: _name,
-                id: this.getEditorId(_id),
-                type: 'component',
-                componentName: this.getEditorName(_id)
-            };
-            editor.addChild(newEditor);
-        } catch(err) {
-            var editor = this.layout.root.getItemsById('editor_main')[0];
-            var tab = this.layout.root.getItemsById(this.getEditorId(_id))[0];
-            editor.setActiveContentItem(tab);
-        }
+            var component_name = this.getEditorName(_id);
+            
+            // Try to register the component, it will fail if it already exists
+            try {
+                this.layout.registerComponent(component_name, function (container, state) {
+                    var startPage = $('<iframe class="fill" src="screens/editor.html?loc=' + _path +'">');
+                    container.getElement().append(startPage);
+                }); 
+            } catch(err) {}
+
+            //  Find out if an editor is already open
+            var editor_count = this.layout.root.getItemsById(this.getEditorId(_id)).length;
+            if (editor_count == 0) {
+                var editor = this.layout.root.getItemsById('editor_main')[0];
+                var newEditor = {
+                    title: _name,
+                    id: this.getEditorId(_id),
+                    type: 'component',
+                    componentName: component_name
+                };
+                editor.addChild(newEditor);
+            } else {
+                // Open the existing tab if it is
+                var editor = this.layout.root.getItemsById('editor_main')[0];
+                var tab = this.layout.root.getItemsById(this.getEditorId(_id))[0];
+                editor.setActiveContentItem(tab);
+            }
     }
 }
 class SocorroProject {
