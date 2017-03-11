@@ -33,22 +33,36 @@ class SocorroState {
         this.version = sc_version;
     }
 
+    getEditorName(_file_id) {
+        return 'editor_file_ui_'+_file_id;
+    }
+
+    
+    getEditorId(_file_id) {
+        return 'editor_file_ui_'+_file_id+"_id";
+    }
+
     openFile(_path,_name,_id) {
-        myLayout.registerComponent( 'editor_file_ui_'+_id, function (container, state) {
-            var startPage = $('<iframe class="fill" src="screens/editor.html?loc=' + _path +'">');
-            container.getElement().append(startPage);
-        }); 
-        var editor = this.layout.root.getItemsById('editor_main')[0];
-        var newEditor = {
-            title: _name,
-            id: _id,
-            type: 'component',
-            componentName: 'editor_file_ui_'+_id,
-        };
-        editor.addChild(newEditor);
+        try {
+            this.layout.registerComponent(this.getEditorName(_id), function (container, state) {
+                var startPage = $('<iframe class="fill" src="screens/editor.html?loc=' + _path +'">');
+                container.getElement().append(startPage);
+            }); 
+            var editor = this.layout.root.getItemsById('editor_main')[0];
+            var newEditor = {
+                title: _name,
+                id: this.getEditorId(_id),
+                type: 'component',
+                componentName: this.getEditorName(_id)
+            };
+            editor.addChild(newEditor);
+        } catch(err) {
+            var editor = this.layout.root.getItemsById('editor_main')[0];
+            var tab = this.layout.root.getItemsById(this.getEditorId(_id))[0];
+            editor.setActiveContentItem(tab);
+        }
     }
 }
-
 class SocorroProject {
     constructor(_folder_path,_build_options) {
         this.folder_path = _folder_path;

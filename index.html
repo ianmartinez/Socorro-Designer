@@ -68,10 +68,13 @@
         // The current project
         var project = new SocorroProject("D:/Socorro IDE/",build_options);
         // The state, containing the project and all the functions needed to modify it
-        var state = new SocorroState(project,"solarized_light",e);
+        var state = new SocorroState(project,"tomorrow",e);
 
         // Init layout
         var config = {
+            settings:{
+                selectionEnabled: true
+            },
             content: [{
                 type: 'row',
                 content:[{
@@ -87,19 +90,20 @@
                     },{
                     type: 'column',
                         width: 28,
-                    content:[{
-                        type: 'component',
-                        height: 65,
-                        componentName: 'color_ui',
-                        title: 'Palette'       
-                    },{
-                        type: 'component',
-                        componentName: 'project_ui',
-                        title: 'Project'  
+                        id: "sidebar_main",
+                        content:[{
+                            type: 'component',
+                            height: 65,
+                            componentName: 'color_ui',
+                            title: 'Palette'       
+                        },{
+                            type: 'component',
+                            componentName: 'project_ui',
+                            title: 'Project'  
+                        }]
                     }]
                 }]
-            }]
-        };
+            };
         var myLayout = new GoldenLayout( config );
 
         myLayout.registerComponent( 'testComponent', function (container, state) {
