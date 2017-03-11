@@ -4,18 +4,18 @@ function isArray(test) {
 
 function copyArr(arr) {
     var new_arr = [];
-    for(var i=0;i<arr.length;i++)
+    for(var i = 0; i<arr.length; i++)
         new_arr[i] = arr[i];
     return new_arr;
 }
 
 function removeAt(arr,pos) {
-   return arr.slice(0, pos) + arr.slice(pos+1);
+   return arr.slice(0,pos) + arr.slice(pos + 1);
 }
 
 function insertAt(arr,pos,item) {
     var new_arr = copyArr(arr);
-    new_arr.splice(pos,0, item);
+    new_arr.splice(pos,0,item);
     return new_arr;
 }
 

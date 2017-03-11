@@ -13,9 +13,9 @@ class scFileTree {
         var file_list = this.enumerateFiles(_path);
         file_list = this.sortPathList(file_list);
         var nodes = [];
-        for(var i=0;i<file_list.length;i++) {
+        for(var i=0; i<file_list.length; i++) {
             var current_path = file_list[i];
-            current_path.parent_id = (_parent_path!= null) ? _parent_path.id : null;
+            current_path.parent_id = (_parent_path != null) ? _parent_path.id : null;
             nodes.push(current_path);
 
             if (current_path.is_folder)
@@ -38,7 +38,7 @@ class scFileTree {
     }
 
     findPath(_id) {
-        for(var i=0;i<this.tree.length;i++) 
+        for(var i=0; i<this.tree.length; i++) 
             if (this.tree[i].id == _id) 
                 return this.tree[i];
     }
@@ -161,7 +161,7 @@ class scFileTree {
     enumerateFiles(_path) {
         var file_list = this.files.readdirSync(_path);
         var files = [];
-        for(var i=0;i<file_list.length;i++) 
+        for(var i=0; i<file_list.length; i++) 
             files.push(new Path(_path+"/"+file_list[i],file_list[i],this.isDirectory(_path+"/"+file_list[i])));
         return files;
     }
@@ -170,7 +170,7 @@ class scFileTree {
         var folders = [];
         var files = [];
 
-        for(var i=0;i<_paths.length;i++) {
+        for(var i=0; i<_paths.length; i++) {
             if(_paths[i].is_folder)
                 folders.push(_paths[i]);
             else
