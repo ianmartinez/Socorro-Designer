@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui>
+	<page title="Hello World Demo" out="index">
+		<object class="scLabel">Hello World!</object>
+	</page>
+</ui>

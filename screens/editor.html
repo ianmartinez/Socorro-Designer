@@ -30,7 +30,7 @@
   <body class="transparent_panel">
     <div class="fill">
         <div class="fill">
-          <pre class="scCodeEditor fill" id="code" style="position: absolute; width: 100%; height: 100%; border: 1px solid black;"> </pre>
+          <pre class="scCodeEditor fill" id="code" style="position: absolute; width: 100%; height: 100%; border: 0px solid rgba(0,0,0,0);"> </pre>
         </div>
     </div>
 
@@ -55,6 +55,7 @@
         // global state object 
         var state = parent.state;
         var loc = GetParameter("loc").toString();
+        window.onclick = parent.global_click;
 
         var code_editor = new scCodeEditor("code",state,loc);
         code_editor.initText();

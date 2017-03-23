@@ -1,5 +1,4 @@
-function GetRandom(min,max)
-{
+function GetRandom(min,max) {
     min = Math.ceil(min);
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -20,8 +19,7 @@ function AddParameters(_url,_args,_vals) {
 	return url;
 }
 
-function GetParameterFromURL(name, url) 
-{
+function GetParameterFromURL(name, url) {
 	if (!url) 
 		url = window.location.href;
 	name = name.replace(/[\[\]]/g, "\\$&");
@@ -41,48 +39,40 @@ function GetParameterDoc(name) {
 }
 	
 			
-function GetUrl()
-{
+function GetUrl() {
 	return window.location.href;
 }
 
 // Document
-function GetTitle()
-{
+function GetTitle() {
 	return document.title;
 }
 
 
-function SetTitle(_Title)
-{
+function SetTitle(_Title) {
 	return document.title = _Title;
 }
 
 // Output
 var Output;
-
-function SetOutput(_Output)
-{
+function SetOutput(_Output) {
 	Output = _Output;
 }
 
-function GetOutput()
-{
+function GetOutput() {
 	if (Output == null)
 		Output = document.body;
 	return Output;
 }
 
-function PutString(_String)
-{
+function PutString(_String) {
 	var t = document.createTextNode(_String);
 	GetOutput().appendChild(t);
 	
 	return t;
 }
 
-function PutLine(_String)
-{
+function PutLine(_String) {
 	if (_String == "undefined" || _String == null)
 		_String = "";
 	
@@ -94,16 +84,13 @@ function PutLine(_String)
 	return t;
 }
 
-function PutLines(_Strings)
-{
+function PutLines(_Strings) {
 	for (let str of _Strings)
 		PutLine(str);
 }
 
-function PutHeader(_String, _Header)
-{
-	if(["h1","h2","h3","h4","h5","h6"].indexOf(_Header.toLowerCase()) != -1)
-	{
+function PutHeader(_String, _Header) {
+	if(["h1","h2","h3","h4","h5","h6"].indexOf(_Header.toLowerCase()) != -1) {
 		var h = document.createElement(_Header);
 		var t = document.createTextNode(_String);
 		h.appendChild(t);

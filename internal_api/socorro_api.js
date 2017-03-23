@@ -19,7 +19,7 @@ function insertAt(arr,pos,item) {
     return new_arr;
 }
 
-const sc_version = ".22";
+const sc_version = ".30";
 class SocorroState {
     constructor(_project,_theme,_e) {
         this.project = _project;
@@ -29,13 +29,21 @@ class SocorroState {
         this.version = sc_version;
     }
 
-    getEditorName(_file_id) {
+    getEditorName(_file_id) { 
         return 'editor_file_ui_'+_file_id;
     }
 
     
     getEditorId(_file_id) {
         return 'editor_file_ui_'+_file_id+"_id";
+    }
+
+    forEachEditor(func) {
+
+    }
+
+    forEachEditorTab(func) {
+
     }
 
     openFile(_path,_name,_id) {

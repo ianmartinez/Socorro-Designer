@@ -3,6 +3,17 @@
   src: url('../fonts/source/SourceSansPro-Regular.ttf');
 }
 
+@font-face {
+  font-family: 'Source Sans Pro Light';
+  src: url('../fonts/source/SourceSansPro-ExtraLight.ttf');
+}
+
+@font-face {
+  font-family: 'Droid Sans Mono';
+  src: url('../fonts/droid_sans_mono/DroidSansMono.ttf');
+}
+
+
 .jstree-anchor {
   display: inline-block;
   color: rgba(255,255,255,1);
@@ -11,14 +22,12 @@
   margin: 0;
   vertical-align: top;
 }
+.container {
+    padding: 0px;
+}
 
 .jstree-icon {
     background-size: cover;
-}
-
-@font-face {
-  font-family: 'Droid Sans Mono';
-  src: url('../fonts/droid_sans_mono/DroidSansMono.ttf');
 }
 
 * { 
@@ -26,18 +35,17 @@
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-button {
-  width: 1px;
-  height: 1px;
+  width: 0px;
+  height: 0px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: rgba(0,0,0,.6);
-  border: 1px solid rgba(0,0,0,0);
-  border-radius: 4px;
+  border: 0px solid rgba(0,0,0,0);
 }
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(0,0,0,.8);
@@ -46,20 +54,26 @@
   background-color: rgba(0,0,0,1);
 }
 ::-webkit-scrollbar-track {
-  background-color:rgba(255,255,255,.4);
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 0px solid rgba(0,0,0,0);
 }
 ::-webkit-scrollbar-track:hover {
-  background: #666666;
+  background: rgba(0, 0, 0, 0.1);
 }
 ::-webkit-scrollbar-track:active {
-  background: #333333;
+  background: rgba(0, 0, 0, 0.4);
 }
 ::-webkit-scrollbar-corner {
   background: transparent;
+  width:0px;
+  height:0px;
+  border: 0px solid rgba(0,0,0,0);
 }
 body {
-    background-color:rgba(255,255,255,.95);
+    background-color:rgba(255,255,255,.95);   
+     height: 100%;
+    width: 100%;
+    position: absolute;
 }
 
 .col-md-4 {
@@ -67,20 +81,60 @@ body {
 }
 
 .padded {
-    background-color: rgba(0, 0, 0, 1);
     padding-top: 1px !important;
+}
+.nav {
+    background-color: rgba(0,0,0,.06);
+}
+
+.nav-tabs > li > a {
+    border-radius: 2px;
+    border: 0px solid transparent;
+}
+
+.borderless {
+    border-radius: 0px;
+    border: 0px solid transparent;
 }
 
 .screen_display {
     width: 100%;
     height: 100%;
-    margin: 0px;
+    margin: 0px; 
+    flex: 1 1 auto;
 }
 
 .fill {
     width: 100%;
     height: 100%;
     margin: 0px;
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    height: 100%;
+}
+.nav > li > a {
+    padding: 4px 8px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.tab-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+}
+
+.tab-content > .active {
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
 }
 
 .transparent_panel {
@@ -97,20 +151,24 @@ body {
 
 .jumbotron-back
 {
-    background: linear-gradient(0deg, #092331 0%, #264453 100%);  
+    background: linear-gradient(0deg, #121415 0%, #3a4044 100%);  
 	border-bottom:1px solid rgba(0, 0, 0, 0.3);
-    background: url("../background.jpg") no-repeat center top; 
+    /*background: url("../background.jpg") no-repeat center top; */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover; 
     color:white;
+    margin-bottom: 0px;
+    padding: 20px;
 }
 
 .brand_name
 {
     color: rgba(255,255,255,0.7);
+    font-family: 'Source Sans Pro Light', sans-serif;
     font-size: 48px;
+    font-weight: 100;
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
 }
 
@@ -265,5 +323,140 @@ iframe
 }
 
 pre {
-    border-radius: 4px;
+    border-radius: 0px;
+}
+
+.nav-tabs {
+    padding-top: 3px;
+}
+
+.heavy-pad {
+    padding: 0px 15px;
+}
+
+.app_toolbar {
+    width: 100%;
+    padding: 0px;
+    min-height: 40px;
+    flex: 0 1 40px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.10) 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    /*background-color: rgba(0,0,0,0.06);*/
+}
+
+.app_toolbarButton {
+    min-width: 32px;
+    min-height: 32px;    
+    box-sizing: content-box;
+    display: inline-block;
+    justify-content: center;
+    flex-direction: column;
+	background-color: rgba(0,0,0,0);
+	cursor:pointer;
+	color:#ffffff;
+	font-size:14px;
+	font-weight:bold;
+	padding:4px;
+	text-decoration:none;
+	border:0px solid transparent;
+	text-shadow:0px 0px 2px rgba(0, 0, 0, 0.9);
+}
+
+.app_toolbarButton:hover {
+    background-color:rgba(43,119,155,0.2);
+    color: #ffffff;
+    text-decoration: none;
+}
+.app_toolbarButton:active {
+    background-color:rgba(43,119,155,0.4);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.app_toolbarButton:focus {
+    color: #ffffff;
+  text-decoration: none;
+}
+
+.app_toolbarButton:visited {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.app_toolbar_sep {
+    height: calc(100% - 10px);
+    width: 1px;
+    position:relative;
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 4px;
+    margin-right: 4px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.img_app_toolbar {
+    width: 24px;
+    height: 24px;
+    display:block;
+    margin: 4px auto;
+}
+
+.img_menu {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin: 0px 4px;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;    
+    top: 40px;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color:rgba(43,119,155,0.2);
+}
+
+.show {
+    display: block;
+}
+
+.menu-p {
+    margin: 10px;
+}
+.menu-p-italic {
+    margin: 10px;
+    margin-left: 20px;
+    color: rgba(0, 0, 0, 0.4);
+    font-style: italic;
 }

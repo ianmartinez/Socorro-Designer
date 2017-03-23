@@ -8,16 +8,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Socorro IDE</title>
+    <title>Socorro Designer</title>
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Tamarack CSS -->
     <link href="tamarack/TamarackStyle.css" rel="stylesheet">
-
-    <!-- Golden Layout-->
-    <link type="text/css" rel="stylesheet" href="ui/golden_layout/goldenlayout-base.css" />
-    <link type="text/css" rel="stylesheet" href="ui/golden_layout/goldenlayout-dark-theme.css" />
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="bootstrap/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -32,97 +28,95 @@
     <![endif]-->
     
     <link href="css/style.css" rel="stylesheet">
-    
   </head>
- 
-  <body class="padded">
-    <!-- Bootstrap core JavaScript -->
-    <script src="js/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="bootstrap/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>  
+  <!-- Socorro API -->
+  <script src="internal_api/socorro_api.js"></script>
 
-    <!-- Tamarack -->
-    <script src="tamarack/TamarackCore.js"></script>
-    <script src="tamarack/TamarackUI.js"></script>
+  <script>
+      // Set global objects
+      const {app} = require('electron');
+      var fs = require('fs');
+      const {clipboard} = require('electron');
+      const {dialog} = require('electron');
+      const {shell} = require('electron');
 
-    <!-- Golden Layout -->
-    <script type="text/javascript" src="ui/golden_layout/goldenlayout.min.js"></script>
+      // The Electron apis that can be called 
+      const e = new ElectronApi(app,fs,clipboard,dialog,shell);
+      // The build options for the current project 
+      var build_options = new SocorroBuildOptions();
+      // The current project
+      var project = new SocorroProject("D:/Socorro IDE/",build_options);
+      // The state, containing the project and all the functions needed to modify it
+      var state = new SocorroState(project,"tomorrow",e);
+  </script>
 
-    <!-- Socorro API -->
-    <script src="internal_api/socorro_api.js"></script>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="js/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="bootstrap/js/vendor/jquery.min.js"><\/script>')</script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>  
+
+  <!-- Tamarack -->
+  <script src="tamarack/TamarackCore.js"></script>
+  <script src="tamarack/TamarackUI.js"></script>
+
+  <body class="fill">
+    <div class="app_toolbar">
+      <a class="app_toolbarButton main_menu_btn" href="#" role="button" onclick="button_click()"><img class="img_app_toolbar main_menu_btn" src="Logo.png"/></a>
+      <div class="dropdown-content" id="dropdown_menu">
+        <p class="menu-p"><img class="img_menu" src="icons/breeze/actions/22/document-open-recent.svg"/>Recent Items:</p>
+        <p class="menu-p-italic">-- No Recent Items --</p>
+      </div>
+
+      <div class="app_toolbar_sep"></div>
+      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/document-new.svg"/></a>
+      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/document-open.svg"/></a>
+      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/document-save.svg"/></a>
+      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/document-save-as.svg"/></a>
+
+      <div class="app_toolbar_sep"></div>
+      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/media-playback-start.svg"/></a>
+
+      <div class="app_toolbar_sep"></div>
+      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/configure.svg"/></a>
+      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/help-about.svg"/></a>  
+    </div>
+    <div class="container fill">
+        <ul class="nav nav-tabs">
+            <li class="active"><a class="borderless" data-toggle="tab" href="#start">Start</a></li>
+            <li><a class="borderless" data-toggle="tab" href="#designer">Designer</a></li>
+            <li><a class="borderless" data-toggle="tab" href="#output">Output</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="start" class="tab-pane fade in active">
+              <iframe class="screen_display" id="start_screen" src="screens/start.html"></iframe>
+            </div>
+            <div id="designer" class="tab-pane fade">
+            </div>
+            <div id="output" class="tab-pane fade">
+              <iframe class="screen_display" src="screens/editor.html?loc=test_ui.scui"></iframe>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Set global objects
-        const {app} = require('electron');
-        var fs = require('fs');
-        const {clipboard} = require('electron');
-        const {dialog} = require('electron');
-        const {shell} = require('electron');
+      function button_click() {
+          document.getElementById("dropdown_menu").classList.toggle("show");
+      }
 
-        // The Electron apis that can be called 
-        const e = new ElectronApi(app,fs,clipboard,dialog,shell);
-        // The build options for the current project 
-        var build_options = new SocorroBuildOptions();
-        // The current project
-        var project = new SocorroProject("D:/Socorro IDE/",build_options);
-        // The state, containing the project and all the functions needed to modify it
-        var state = new SocorroState(project,"tomorrow",e);
-
-        // Init layout
-        var config = {
-            settings:{
-                selectionEnabled: true
-            },
-            content: [{
-                type: 'row',
-                content:[{
-                        type: 'stack',
-                        id: "editor_main",
-                        content: [
-                            {
-                                type:'component',
-                                componentName: 'start_page',
-                                title: 'Start Page'    
-                            }
-                        ]
-                    },{
-                    type: 'column',
-                        width: 28,
-                        id: "sidebar_main",
-                        content:[{
-                            type: 'component',
-                            height: 65,
-                            componentName: 'color_ui',
-                            title: 'Palette'       
-                        },{
-                            type: 'component',
-                            componentName: 'project_ui',
-                            title: 'Project'  
-                        }]
-                    }]
-                }]
-            };
-        var myLayout = new GoldenLayout( config );
-
-        myLayout.registerComponent( 'testComponent', function (container, state) {
-                    
-        });   
-        myLayout.registerComponent( 'start_page', function (container, state) {
-            var startPage = $('<iframe class="screen_display" src="screens/start.html">');
-            container.getElement().append(startPage);
-        }); 
-        myLayout.registerComponent( 'color_ui', function (container, state) {
-            var startPage = $('<iframe class="fill" src="panels/colors.html">');
-            container.getElement().append(startPage);
-        }); 
-        myLayout.registerComponent( 'project_ui', function (container, state) {
-            var startPage = $('<iframe class="fill" src="panels/project.html">');
-            container.getElement().append(startPage);
-        }); 
-        myLayout.init();
-        state.layout = myLayout;
+      // Close the dropdown if the user clicks outside of it
+      var dropdown_menu = document.getElementById("dropdown_menu");
+      function global_click(e) {
+        if (!e.target.matches('.main_menu_btn')) {
+          if (dropdown_menu.classList.contains('show')) 
+            dropdown_menu.classList.remove('show');
+        }
+      }
+      window.onclick = global_click;
+      
     </script>
   </body>
 </html>

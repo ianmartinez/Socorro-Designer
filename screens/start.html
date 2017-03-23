@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Socorro IDE</title>
+    <title>Socorro Designer</title>
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
 
@@ -30,28 +30,7 @@
     <link href="../css/style.css" rel="stylesheet">
   </head>
   <body>
-    <div class="jumbotron jumbotron-back" style="padding-top:0px">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container toolbar">
-                <div class="navbar-header">
-                  <a class="toolbarButton" href="#" role="button"><img class="imgToolbar" src="../icons/breeze-dark/actions/32/document-open.svg"/>Open</a>
-                  <a class="toolbarButton" href="#" role="button"><img class="imgToolbar" src="../icons/breeze-dark/actions/32/configure.svg"/>Settings</a>
-                  <a class="toolbarButton" href="#" role="button"><img class="imgToolbar" src="../icons/breeze-dark/actions/32/help-about.svg"/>About</a>
-                </div>
-            </div>
-        </nav>
-      <div class="container">    
-        <img class="imgLogo" src="../Logo.png" style="float:left;"/>    
-        <h1 class="brand_name" id="brand_name">Socorro</h1>
-      </div>
-    </div>
-
-   <div class="container">
-      <h2 class="front_header">Recent Projects</h2>
-      <p class="front_subheader">You have no recent projects.</p>
-    </div>
-
-    <div class="container form">
+    <div class="container form heavy-pad">
       <h2 class="front_header">Templates</h2>
       <p class="front_subheader">To start a project, pick a template.</p>
       <div class="row">
@@ -113,8 +92,9 @@
     <script>
         // global state object 
         var state = parent.state;
-
-      $("#brand_name").text("Socorro " + state.version);
+        window.onclick = parent.global_click;
+        
+        $("#brand_name").text("Socorro Designer " + state.version);
     </script>
   </body>
 </html>

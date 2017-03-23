@@ -1,8 +1,11 @@
+function removeAt(arr,pos) {
+    return arr.slice(0,pos) + arr.slice(pos + 1);
+}
+
 var current_editor;
-class scCodeEditor extends tkControl
-{
-    constructor(_editor_id,_state,_associated_file)
-    {
+var editors = [];
+class scCodeEditor extends tkControl {
+    constructor(_editor_id,_state,_associated_file) {
         super(_editor_id);
 
         this.editorId = _editor_id;
@@ -24,6 +27,7 @@ class scCodeEditor extends tkControl
         }
 
         this.e = _state.e;
+        editors.push(this);
     }
 
     setTheme(_theme) {
@@ -35,21 +39,25 @@ class scCodeEditor extends tkControl
     }
 
     setText(_value,_position) {
-        current_editor.setValue(_value,_position);
+        this.editor.setValue(_value,_position);
     }
 
-    readFile(_file)
-    {
-        current_editor = this.editor;
+    readFile(_file) {
         this.e.files.readFile(_file, 'utf-8', (err, data) => this.setText(data,-1));
     }
 
-    setExt(_ext) 
-    {
+    destroy() {
+        var editor_pos = editors.indexOf(this);
+        editors = removeAt(editors, editor_pos);
+    }
+
+    setExt(_ext) {
         var ext = _ext.toLowerCase();
         if (ext == "html")
             this.editor.session.setMode("ace/mode/html");
         else if (ext == "xml")
+            this.editor.session.setMode("ace/mode/xml");
+        else if (ext == "scui")
             this.editor.session.setMode("ace/mode/xml");
         else if (ext == "js")
             this.editor.session.setMode("ace/mode/javascript");
