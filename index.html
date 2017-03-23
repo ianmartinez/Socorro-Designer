@@ -67,27 +67,23 @@
       <a class="app_toolbarButton main_menu_btn" href="#" role="button" onclick="button_click()"><img class="img_app_toolbar main_menu_btn" src="Logo.png"/></a>
       <div class="dropdown_content" id="dropdown_menu">
         <div class="left_menu">
-          <p class="menu_p"><img class="img_menu" src="icons/breeze/actions/22/document-open-recent.svg"/>Recent Items:</p>
-          <p class="menu_p_italic">-- No Recent Items --</p>
+          <a class="app_menu_button" href="#" role="button"><img class="img_app_menu" src="icons/breeze-dark/actions/22/document-new.svg"/>New</a>
+          <a class="app_menu_button" href="#" role="button"><img class="img_app_menu" src="icons/breeze-dark/actions/22/document-open.svg"/>Open</a>
+          <a class="app_menu_button" href="#" role="button"><img class="img_app_menu" src="icons/breeze-dark/actions/22/document-save.svg"/>Save</a>
+          <a class="app_menu_button" href="#" role="button"><img class="img_app_menu" src="icons/breeze-dark/actions/22/document-save-as.svg"/>Save As</a>
+
+          <div class="app_menu_sep"></div>
+
+          <a class="app_menu_button" href="#" role="button"><img class="img_app_menu" src="icons/breeze-dark/actions/22/configure.svg"/> Settings</a>
+          <a class="app_menu_button" href="#" role="button"><img class="img_app_menu" src="icons/breeze-dark/actions/22/help-about.svg"/> About</a>  
         </div>
-        <div class="recents_menu">
-          <p class="menu_p"><img class="img_menu" src="icons/breeze/actions/22/document-open-recent.svg"/>Recent Items:</p>
-          <p class="menu_p_italic">-- No Recent Items --</p>
+        <div class="right_menu">
+          <p class="menu_p"><img class="img_menu" src="icons/breeze-dark/actions/22/document-open-recent.svg"/>Recent Projects:</p>
         </div>
       </div>
 
       <div class="app_toolbar_sep"></div>
-      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/document-new.svg"/></a>
-      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/document-open.svg"/></a>
-      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/document-save.svg"/></a>
-      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/document-save-as.svg"/></a>
-
-      <div class="app_toolbar_sep"></div>
       <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/media-playback-start.svg"/></a>
-
-      <div class="app_toolbar_sep"></div>
-      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/configure.svg"/></a>
-      <a class="app_toolbarButton" href="#" role="button"><img class="img_app_toolbar" src="icons/breeze/actions/22/help-about.svg"/></a>  
     </div>
     <div class="container fill">
         <ul class="nav nav-tabs">
@@ -113,15 +109,15 @@
 
     <script>
       function button_click() {
-          document.getElementById("dropdown_menu").classList.toggle("show");
+          document.getElementById("dropdown_menu").classList.toggle("flex_show");
       }
 
       // Close the dropdown if the user clicks outside of it
       var dropdown_menu = document.getElementById("dropdown_menu");
       function global_click(e) {
         if (!e.target.matches('.main_menu_btn')) {
-          if (dropdown_menu.classList.contains('show')) 
-            dropdown_menu.classList.remove('show');
+          if (dropdown_menu.classList.contains('flex_show')) 
+            dropdown_menu.classList.remove('flex_show');
         }
       }
       window.onclick = global_click;
