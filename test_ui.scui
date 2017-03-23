@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui>
-	<page title="Hello World Demo" out="index">
-		<object class="scLabel">Hello World!</object>
-	</page>
-</ui>
+<app>
+	<config>
+		<name>Hello World Demo</name>
+		<version>1.0</version>
+		<target>electron</target>
+		<favicon>favicon.png</favicon>
+		<hd_icon>hd_icon.png</hd_icon>
+	</config>
+	<ui>
+		<window out="index">
+			<object class="scLabel">Hello World!</object>
+		</window>
+	</ui>
+</app>

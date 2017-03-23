@@ -25,88 +25,15 @@ class SocorroState {
         this.project = _project;
         this.e = _e;
         this.theme = _theme;
-        this.layout = "";
         this.version = sc_version;
-    }
-
-    getEditorName(_file_id) { 
-        return 'editor_file_ui_'+_file_id;
-    }
-
-    
-    getEditorId(_file_id) {
-        return 'editor_file_ui_'+_file_id+"_id";
-    }
-
-    forEachEditor(func) {
-
-    }
-
-    forEachEditorTab(func) {
-
-    }
-
-    openFile(_path,_name,_id) {
-            var component_name = this.getEditorName(_id);
-            
-            // Try to register the component, it will fail if it already exists
-            try {
-                this.layout.registerComponent(component_name, function (container, state) {
-                    var startPage = $('<iframe class="fill" src="screens/editor.html?loc=' + _path +'">');
-                    container.getElement().append(startPage);
-                }); 
-            } catch(err) {}
-
-            //  Find out if an editor is already open
-            var editor_count = this.layout.root.getItemsById(this.getEditorId(_id)).length;
-            if (editor_count === 0) {
-                var editor = this.layout.root.getItemsById('editor_main')[0];
-                var newEditor = {
-                    title: _name,
-                    id: this.getEditorId(_id),
-                    type: 'component',
-                    componentName: component_name
-                };
-                editor.addChild(newEditor);
-            } else {
-                // Open the existing tab if it is
-                var editor = this.layout.root.getItemsById('editor_main')[0];
-                var tab = this.layout.root.getItemsById(this.getEditorId(_id))[0];
-                editor.setActiveContentItem(tab);
-            }
     }
 }
 class SocorroProject {
-    constructor(_folder_path,_build_options) {
-        this.folder_path = _folder_path;
+    constructor(_file_path,_build_options) {
+        this.file_path = _file_path;
         this.build_options = _build_options;
-        this.variables = [];
         this.favicon = "favicon.ico";
         this.apple_icon = "apple-touch-icon.png";
-        this.selected_node = "";
-    }
-
-    addVariable(_key,_value) {
-        this.variables.push(new SocorroVariable(_key,_value));
-    }
-
-    removeVariable(_key) {
-        this.variables.forEach((item, i) => {
-            if (item.key == _key) 
-                this.variables = removeAt(this.variables,i);
-        });
-    }
-}
-
-class SocorroVariable {
-    constructor(_key,_value) {
-        this.key = _key;
-        this.value = _value;
-    }
-
-    insertVariable(_text) {
-        var replace = new RegExp(this.key,"g");
-        return _text.replace(replace, _value);
     }
 }
 

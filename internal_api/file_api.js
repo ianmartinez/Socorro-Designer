@@ -43,9 +43,160 @@ class scFileTree {
                 return this.tree[i];
     }
 
-    createNode(_path) {
+    enumerateFiles(_path) {
+        var file_list = this.files.readdirSync(_path);
+        var files = [];
+        for(var i=0; i<file_list.length; i++) 
+            files.push(new Path(_path+"/"+file_list[i],file_list[i],this.isDirectory(_path+"/"+file_list[i])));
+        return files;
+    }
+
+    sortPathList(_paths) {
+        var folders = [];
+        var files = [];
+
+        for(var i=0; i<_paths.length; i++) {
+            if(_paths[i].is_folder)
+                folders.push(_paths[i]);
+            else
+                files.push(_paths[i]);
+        }
+
+        folders = this.sortAlpha(folders);
+        files = this.sortAlpha(files);
+
+        return folders.concat(files);
+    }
+
+    sortAlpha(_paths) {
+        return _paths.sort((a,b) => a.compareAlpha(b));
+    }
+}
+
+var id_list = [];
+class Path {
+    constructor(_location,_name,_is_folder,_id,_parent_id) {
+        this.location = _location;
+        this.name = _name;
+        this.is_folder = _is_folder;
+        this.id = (_id == null) ? this.makeId() : this.id = _id;
+        this.parent_id = _parent_id;
+        this.is_editable = true;
+
+        if (this.is_folder) {
+            this.ext = "folder";
+            this.is_editable = false;
+            switch (this.name.toLowerCase()) {
+                case "css":
+                    this.ext = "css_folder";
+                    break;
+                case "sass":
+                    this.ext = "sass_folder";
+                    break;
+                case "ttf":
+                case "otf":
+                case "font":
+                case "fonts":
+                    this.ext = "font_folder";
+                    break;
+                case "photos":
+                case "images":
+                case "photo":
+                case "image":
+                case "img":
+                case "ico":
+                case "icon":
+                case "icons":
+                case "png":
+                case "svg":
+                case "jpg":
+                case "jpeg":
+                case "gif":
+                case "gifs":
+                    this.ext = "img_folder";
+                    break;
+                case "html":
+                    this.ext = "html_folder";
+                    break;
+                case "sound":
+                case "music":
+                case "mp3":
+                    this.ext = "sound_folder";
+                    break;
+                case "temp":
+                    this.ext = "temp_folder";
+                    break;
+                case "template":
+                    this.ext = "template_folder";
+                    break;
+                case "text":
+                case "txt":
+                    this.ext = "text_folder";
+                    break;
+                case "script":
+                case "scripts":
+                case "js":
+                case "ts":
+                case "javascript":
+                case "typescript":
+                    this.ext = "script_folder";
+                    break;
+                case "video":
+                case "clips":
+                    this.ext = "video_folder";
+                    break;
+                case "home":
+                    this.ext = "home_folder";
+                    break;
+                case "trash":
+                case "old":
+                    this.ext = "trash_folder";
+                    break;
+                case "bootstrap":
+                    this.ext = "bootstrap_folder";
+                    break;
+                case "socorro":
+                    this.ext = "socorro_folder";
+                    break;
+                case "tamarack":
+                    this.ext = "tk_folder";
+            }
+        } else {
+            var dotSplit = this.name.split(".");
+            this.ext = dotSplit[dotSplit.length-1].toLowerCase();
+            switch (this.name.split(".")[0].toLowerCase()) {
+                case "readme":
+                case "read":
+                case "license":
+                    this.ext = "readme_file";
+            }
+        }
+
+    }
+    
+    compareAlpha(b) {
+        if (this.name<b.name)
+                 return -1;
+        if (this.name>b.name) 
+            return 1;
+        return 0;
+    }
+
+    randId() {
+        return "path_" + Math.floor((Math.random() * 1000000) + 1);
+    }
+
+    makeId() {
+        var new_id = this.randId();
+        while(id_list.includes(new_id)) 
+            new_id = this.randId();
+
+        return new_id;
+    }
+
+    getIcon() {
         var icon = "../icons/breeze/mimetypes/32/application-x-zerosize.svg";
-        switch (_path.ext) {
+        switch (this.ext) {
             // plain folder
             case "folder":
                 icon = "../icons/breeze/places/32/folder.svg";
@@ -151,161 +302,9 @@ class scFileTree {
                 icon = "../icons/breeze/mimetypes/32/urgent-file.svg";
         }
         
-        if(_path.parent_id != null) {
+        if(_path.parent_id != null) 
             return {"id" : _path.id, "text" : _path.name, "icon": icon, "parent": _path.parent_id};
-        }
         else
             return {"id" : _path.id, "text" : _path.name, "icon": icon, "parent": "#"};
-    }
-
-    enumerateFiles(_path) {
-        var file_list = this.files.readdirSync(_path);
-        var files = [];
-        for(var i=0; i<file_list.length; i++) 
-            files.push(new Path(_path+"/"+file_list[i],file_list[i],this.isDirectory(_path+"/"+file_list[i])));
-        return files;
-    }
-
-    sortPathList(_paths) {
-        var folders = [];
-        var files = [];
-
-        for(var i=0; i<_paths.length; i++) {
-            if(_paths[i].is_folder)
-                folders.push(_paths[i]);
-            else
-                files.push(_paths[i]);
-        }
-
-        folders = this.sortAlpha(folders);
-        files = this.sortAlpha(files);
-
-        return folders.concat(files);
-    }
-
-    comparePath(a,b) {
-        if (a.name<b.name)
-                 return -1;
-        if (a.name>b.name) 
-            return 1;
-        return 0;
-    }
-
-    sortAlpha(_paths) {
-        return _paths.sort((a,b) => this.comparePath(a,b));
-    }
-}
-
-var id_list = [];
-class Path {
-    constructor(_location,_name,_is_folder,_id,_parent_id) {
-        this.location = _location;
-        this.name = _name;
-        this.is_folder = _is_folder;
-        this.id = (_id == null) ? this.makeId() : this.id = _id;
-        this.parent_id = _parent_id;
-        this.is_editable = true;
-
-        if (this.is_folder) {
-            this.ext = "folder";
-            this.is_editable = false;
-            switch (this.name.toLowerCase()) {
-                case "css":
-                    this.ext = "css_folder";
-                    break;
-                case "sass":
-                    this.ext = "sass_folder";
-                    break;
-                case "ttf":
-                case "otf":
-                case "font":
-                case "fonts":
-                    this.ext = "font_folder";
-                    break;
-                case "photos":
-                case "images":
-                case "photo":
-                case "image":
-                case "img":
-                case "ico":
-                case "icon":
-                case "icons":
-                case "png":
-                case "svg":
-                case "jpg":
-                case "jpeg":
-                case "gif":
-                case "gifs":
-                    this.ext = "img_folder";
-                    break;
-                case "html":
-                    this.ext = "html_folder";
-                    break;
-                case "sound":
-                case "music":
-                case "mp3":
-                    this.ext = "sound_folder";
-                    break;
-                case "temp":
-                    this.ext = "temp_folder";
-                    break;
-                case "template":
-                    this.ext = "template_folder";
-                    break;
-                case "text":
-                case "txt":
-                    this.ext = "text_folder";
-                    break;
-                case "script":
-                case "scripts":
-                case "js":
-                case "ts":
-                case "javascript":
-                case "typescript":
-                    this.ext = "script_folder";
-                    break;
-                case "video":
-                case "clips":
-                    this.ext = "video_folder";
-                    break;
-                case "home":
-                    this.ext = "home_folder";
-                    break;
-                case "trash":
-                case "old":
-                    this.ext = "trash_folder";
-                    break;
-                case "bootstrap":
-                    this.ext = "bootstrap_folder";
-                    break;
-                case "socorro":
-                    this.ext = "socorro_folder";
-                    break;
-                case "tamarack":
-                    this.ext = "tk_folder";
-            }
-        } else {
-            var dotSplit = this.name.split(".");
-            this.ext = dotSplit[dotSplit.length-1].toLowerCase();
-            switch (this.name.split(".")[0].toLowerCase()) {
-                case "readme":
-                case "read":
-                case "license":
-                    this.ext = "readme_file";
-            }
-        }
-
-    }
-    
-    randId() {
-        return "path_" + Math.floor((Math.random() * 1000000) + 1);
-    }
-
-    makeId() {
-        var new_id = this.randId();
-        while(id_list.includes(new_id)) 
-            new_id = this.randId();
-
-        return new_id;
     }
 }

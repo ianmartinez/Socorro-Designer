@@ -65,9 +65,15 @@
   <body class="fill">
     <div class="app_toolbar">
       <a class="app_toolbarButton main_menu_btn" href="#" role="button" onclick="button_click()"><img class="img_app_toolbar main_menu_btn" src="Logo.png"/></a>
-      <div class="dropdown-content" id="dropdown_menu">
-        <p class="menu-p"><img class="img_menu" src="icons/breeze/actions/22/document-open-recent.svg"/>Recent Items:</p>
-        <p class="menu-p-italic">-- No Recent Items --</p>
+      <div class="dropdown_content" id="dropdown_menu">
+        <div class="left_menu">
+          <p class="menu_p"><img class="img_menu" src="icons/breeze/actions/22/document-open-recent.svg"/>Recent Items:</p>
+          <p class="menu_p_italic">-- No Recent Items --</p>
+        </div>
+        <div class="recents_menu">
+          <p class="menu_p"><img class="img_menu" src="icons/breeze/actions/22/document-open-recent.svg"/>Recent Items:</p>
+          <p class="menu_p_italic">-- No Recent Items --</p>
+        </div>
       </div>
 
       <div class="app_toolbar_sep"></div>
@@ -87,16 +93,19 @@
         <ul class="nav nav-tabs">
             <li class="active"><a class="borderless" data-toggle="tab" href="#start">Start</a></li>
             <li><a class="borderless" data-toggle="tab" href="#designer">Designer</a></li>
+            <li><a class="borderless" data-toggle="tab" href="#config">Configuration</a></li>
             <li><a class="borderless" data-toggle="tab" href="#output">Output</a></li>
         </ul>
 
-        <div class="tab-content">
-            <div id="start" class="tab-pane fade in active">
+        <div class="tab_content">
+            <div id="start" class="tab_pane fade in active">
               <iframe class="screen_display" id="start_screen" src="screens/start.html"></iframe>
             </div>
-            <div id="designer" class="tab-pane fade">
+            <div id="designer" class="tab_pane fade">
             </div>
-            <div id="output" class="tab-pane fade">
+            <div id="config" class="tab_pane fade">
+            </div>
+            <div id="output" class="tab_pane fade">
               <iframe class="screen_display" src="screens/editor.html?loc=test_ui.scui"></iframe>
             </div>
         </div>
