@@ -40,6 +40,7 @@ p {
 
 ::-webkit-scrollbar {
     width: 5px;
+    border-radius: 5px;
     height: 5px;
 }
 
@@ -51,6 +52,7 @@ p {
 ::-webkit-scrollbar-thumb {
     background-color: rgba(0,0,0,.6);
     border: 0px solid rgba(0,0,0,0);
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -63,6 +65,7 @@ p {
 
 ::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
     border: 0px solid rgba(0,0,0,0);
 }
 
@@ -96,16 +99,6 @@ body {
     background-color: rgba(0,0,0,.06);
 }
 
-.nav-tabs > li > a {
-    border-radius: 2px;
-    border: 0px solid transparent;
-}
-
-.borderless {
-    border-radius: 0px;
-    border: 0px solid transparent;
-}
-
 .screen_display {
     width: 100%;
     height: 100%;
@@ -123,28 +116,6 @@ body {
     flex-wrap: nowrap;
     overflow: hidden;
     height: 100%;
-}
-
-.nav > li > a {
-    padding: 4px 8px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-}
-
-.tab-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-flow: column;
-    flex: 1 1 auto;
-}
-
-.tab-content > .active {
-    display: flex;
-    flex-flow: column;
-    flex: 1 1 auto;
 }
 
 .transparent_panel {
@@ -234,25 +205,21 @@ iframe {
     bottom: 5px;
     position: absolute;
     box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.1);
-    background: linear-gradient(to bottom, #3db1ec 5%, #37a1d5 100%);
+    background: linear-gradient(to bottom, #3daee9 0%, #1d99f3 100%);
     background-color: #37a1d5;
     border-radius: 3px;
-    border: 1px solid #5193b3;
+    border: 0px solid #5193b3;
     display: inline-block;
     cursor: pointer;
     color: #ffffff;
-    font-family: Arial;
-    font-size: 13px;
-    font-weight: bold;
     padding: 6px 12px;
     text-decoration: none;
-    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
 }
 
 .createButton:hover {
-    background: linear-gradient(to bottom, #89d3fa 5%, #74c2eb 100%);
+    background: linear-gradient(to bottom, #3498db 0%, #2980b9 100%);
     background-color: #74c2eb;
-    border: 1px solid #73b0ce;
+    border: 0px solid #73b0ce;
     color: #ffffff;
     text-decoration: none;
 }
@@ -345,6 +312,59 @@ pre {
     padding-top: 3px;
 }
 
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: 2px solid #3498db;
+    border-bottom: 0px solid transparent;
+}
+
+.nav-tabs > li > a {
+    border-radius: 2px;
+    border: 0px solid transparent;
+}
+
+.nav > li > a {
+    background-color: #e5e5e5;
+    border: 1px solid #d6d6d6;
+    border-bottom: 0px solid transparent;
+    color: #555;
+    padding: 4px 8px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.nav-tabs > li > a:hover {
+    background-color: #d8d8d8;
+    border: 1px solid #c7c6c6;
+    border-top: 2px solid #2980b9;
+    border-bottom: 0px solid transparent;
+
+}
+
+.tab-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+}
+
+.tab-content > .active {
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+}
+
+.borderless {
+    border-radius: 0px;
+    border: 0px solid transparent;
+}
+
 .heavy-pad {
     padding: 0px 15px;
 }
@@ -354,8 +374,8 @@ pre {
     padding: 0px;
     min-height: 40px;
     flex: 0 1 40px;
-    background: linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.10) 100%);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: rgba(0,0,0,.06);
+    border-bottom: 0px solid rgba(0, 0, 0, 0);
     /*background-color: rgba(0,0,0,0.06);*/;
 }
 
@@ -374,7 +394,6 @@ pre {
     padding: 4px;
     text-decoration: none;
     border: 0px solid transparent;
-    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
 }
 
 .app_toolbarButton:hover {
