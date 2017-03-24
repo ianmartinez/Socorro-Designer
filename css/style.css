@@ -133,7 +133,6 @@ body {
 .jumbotron-back {
     background: linear-gradient(0deg, #121415 0%, #3a4044 100%);
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-        /*background: url("../background.jpg") no-repeat center top; */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -343,6 +342,7 @@ pre {
     background-color: #d8d8d8;
     border: 1px solid #c7c6c6;
     border-top: 2px solid #2980b9;
+    padding: 4px 8px;
     border-bottom: 0px solid transparent;
 
 }
@@ -580,4 +580,26 @@ pre {
     margin-left: 4px;
     margin-right: 4px;
     background-color: rgba(255,255,255, 0.15);
+}
+
+/* Design Tab */
+.designer_content {
+    flex-flow: row;
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+    display: flex;
+    position: absolute;
+    background-color: transparent;
+    z-index: 1;
+}
+
+.left_pane {
+    flex: 0 1 300px;
+    width: 300px;
+}
+
+.right_pane {
+    flex: 1 1 300px;
+    border-left: 1px solid rgba(0,0,0,.025);
+    background-color: rgba(0,0,0,.1);
 }

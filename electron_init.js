@@ -10,7 +10,7 @@ let win
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 1024, height: 600, minWidth: 435, minHeight: 300})
+  win = new BrowserWindow({width: 1024, height: 600, minWidth: 300, minHeight: 300})
 
   // and load the index.html of the app.
   win.loadURL(url.format({
@@ -21,7 +21,7 @@ function createWindow () {
 
   // Set window size
   win.setSize(900,725)
-  win.setMenu(null)
+ // win.setMenu(null)
   // Emitted when the window is closed.
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
