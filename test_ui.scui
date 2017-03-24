@@ -9,7 +9,7 @@
 	</config>
 	<ui>
 		<window out="index">
-			<object class="scLabel">Hello World!</object>
+			<object class="scText" type="p">Hello World!</object>
 		</window>
 	</ui>
 </app>
