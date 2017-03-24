@@ -201,7 +201,7 @@ iframe {
     justify-content: center;
 }
 
-.createButton {
+.create_button {
     bottom: 5px;
     position: absolute;
     box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.1);
@@ -216,7 +216,7 @@ iframe {
     text-decoration: none;
 }
 
-.createButton:hover {
+.create_button:hover {
     background: linear-gradient(to bottom, #3498db 0%, #2980b9 100%);
     background-color: #74c2eb;
     border: 0px solid #73b0ce;
@@ -224,18 +224,19 @@ iframe {
     text-decoration: none;
 }
 
-.createButton:active {
-    bottom: 3px;
+.create_button:active {
+    /*bottom: 3px;*/
+    color: #ffffff;
+    background: linear-gradient(to bottom, #2b7fb7 0%, #246fa0 100%);
+    text-decoration: none;
+}
+
+.create_button:focus {
     color: #ffffff;
     text-decoration: none;
 }
 
-.createButton:focus {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.createButton:visited {
+.create_button:visited {
     color: #ffffff;
     text-decoration: none;
 }
@@ -369,17 +370,54 @@ pre {
     padding: 0px 15px;
 }
 
-.app_toolbar {
-    width: 100%;
-    padding: 0px;
-    min-height: 40px;
-    flex: 0 1 40px;
-    background-color: rgba(0,0,0,.06);
-    border-bottom: 0px solid rgba(0, 0, 0, 0);
-    /*background-color: rgba(0,0,0,0.06);*/;
+
+@media (min-width: 400px) {
+    .app_toolbar {
+        width: 100%;
+        padding: 0px;
+        min-height: 40px;
+        flex: 0 1 40px;
+        background-color: rgba(0,0,0,.06);
+        border-bottom: 0px solid rgba(0, 0, 0, 0);
+    }
+
+    .app_toolbar_sep {
+        height: calc(100% - 10px);
+        width: 1px;
+        position: relative;
+        display: inline-block;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 4px;
+        margin-right: 4px;
+        background-color: rgba(0, 0, 0, 0.15);
+    }
 }
 
-.app_toolbarButton {
+@media (max-width: 400px) {
+    .app_toolbar {
+        width: 100%;
+        padding: 0px;
+        min-height: 100px;
+        flex: 0 1 100px;
+        background-color: rgba(0,0,0,.06);
+        border-bottom: 0px solid rgba(0, 0, 0, 0);
+    }
+
+    .app_toolbar_sep {
+        height: calc(50% - 10px);
+        width: 1px;
+        position: relative;
+        display: inline-block;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 4px;
+        margin-right: 4px;
+        background-color: rgba(0, 0, 0, 0.15);
+    }
+}
+
+.app_toolbar_button {
     min-width: 32px;
     min-height: 32px;
     box-sizing: content-box;
@@ -396,38 +434,26 @@ pre {
     border: 0px solid transparent;
 }
 
-.app_toolbarButton:hover {
+.app_toolbar_button:hover {
     background-color: rgba(9,128,184,0.2);
     color: #ffffff;
     text-decoration: none;
 }
 
-.app_toolbarButton:active {
+.app_toolbar_button:active {
     background-color: rgba(9,128,184,0.4);
     color: #ffffff;
     text-decoration: none;
 }
 
-.app_toolbarButton:focus {
+.app_toolbar_button:focus {
     color: #ffffff;
     text-decoration: none;
 }
 
-.app_toolbarButton:visited {
+.app_toolbar_button:visited {
     color: #ffffff;
     text-decoration: none;
-}
-
-.app_toolbar_sep {
-    height: calc(100% - 10px);
-    width: 1px;
-    position: relative;
-    display: inline-block;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 4px;
-    margin-right: 4px;
-    background-color: rgba(0, 0, 0, 0.15);
 }
 
 .img_app_toolbar {
