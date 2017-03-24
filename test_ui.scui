@@ -8,7 +8,7 @@
 		<hd_icon>hd_icon.png</hd_icon>
 	</config>
 	<ui>
-		<window out="index">
+		<window out="index" title="Hello World Demo">
 			<object class="scText" type="p">Hello World!</object>
 		</window>
 	</ui>
