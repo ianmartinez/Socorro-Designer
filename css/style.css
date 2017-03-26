@@ -205,7 +205,6 @@ iframe {
     position: absolute;
     box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.1);
     background: linear-gradient(to bottom, #3daee9 0%, #1d99f3 100%);
-    background-color: #37a1d5;
     border-radius: 3px;
     border: 0px solid #5193b3;
     display: inline-block;
@@ -605,6 +604,7 @@ pre {
     padding: 10px;
     border-left: 1px solid rgba(0,0,0,.025);
     background-color: rgba(0,0,0,.1);
+    overflow: auto;
 }
 
 .palette_button {    
@@ -659,7 +659,14 @@ h5 {
 /* Widget Styles */
 .dsWidgetContainer {  
     display: block;
-    position: absolute;
+    position: relative;
+    margin-bottom: 10px;
+
+    /* Widget size + (border size*2) */
+    width: calc(400px + 2px);
+    padding: 2px;    
+    box-sizing: content-box;
+    overflow:auto;
 }
 
 .dsWidgetBorder { 
@@ -671,26 +678,71 @@ h5 {
     background: linear-gradient(to bottom, #3daee9 0%, #1d99f3 100%);
     border: 1px solid #2980b9;  
     border-top: 0px solid #2980b9;  
+    border-right: 0px solid #ac3d48;  
     color: white;
     width: 33.33%;
-    float: right;
-    box-sizing: content-box;
+    float: left;
     height: 20px;
     padding: 3px;
     text-align: center;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
     border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 0px;
+    box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.15);   
+    box-sizing: content-box;
+}
+
+.dsWidgetRunButton {
+    background: linear-gradient(to bottom, #2b7fb7 0%, #246fa0 100%);
+    border: 1px solid #226997;  
+    border-top: 0px solid transparent;  
+    border-left: 0px solid transparent;  
+    color: white;
+    width: 20px;
+    float: left;
+    height: 20px;
+    padding: 3px;
+    text-align: center;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
     border-bottom-right-radius: 4px;
-    box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.15);
+    box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.15);   
+    box-sizing: content-box;
+}
+
+.dsWidgetRunButton:hover { 
+    color: #ffffff;
+    background: linear-gradient(to bottom, #226b9b 0%, #20628d 100%);
+    border: 1px solid #1b557b;  
+    border-top: 0px solid transparent;  
+    border-left: 0px solid transparent;  
+    text-decoration: none;
+}
+
+.dsWidgetRunButton:active { 
+    color: #ffffff;
+    background: linear-gradient(to bottom, #1b547a 0%, #184b6d 100%);
+    border: 1px solid #133f5b;  
+    border-top: 0px solid transparent;  
+    border-left: 0px solid transparent;  
+    text-decoration: none;
 }
 
 .dsWindow {
     background-color: white;
-    width: 400px;
     height: 300px;
+    width: 400px;
 }
 
 .dsP {
     margin: 0px;
+}
+
+.img_run_button {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0px 0px 2px 0px;
 }

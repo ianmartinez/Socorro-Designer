@@ -54,7 +54,7 @@
           
           <h5>Editors</h5>
           <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/document_notes.png"/>Text Edit</a>       
-          <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/document_image.png"/>Rich Text Edit</a>  
+          <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/script_code.png"/>Code Edit</a>
 
           <h5>Buttons</h5>
           <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/button_default.png"/>Button</a>
@@ -74,11 +74,20 @@
           <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/resource_usage.png"/>Meter</a>       
           <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/star.png"/>Rating</a>   
 
+          <h5>Data</h5>
+          <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/preferences.png"/>Property Panel</a>  
+          
+          <h5>Lists</h5>
+          <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/combo_box_light_blue.png"/>Combo Box</a> 
+          <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/list_box.png"/>List</a> 
+          <!-- A list like the widget list in the design tab -->
+          <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/category.png"/>Category List</a> 
+
           <h5>Forms</h5>
           <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/form.png"/>Form</a>
           <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/button_default.png"/>Button</a>
           <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/cancel.png"/>Reset Button</a>
-          <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/button_default.png"/>Submit Button</a>
+          <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/accept_button.png"/>Submit Button</a>
           <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/check_box_check.png"/>Checkbox Input</a>
           <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/radiobutton_marked.png"/>Radio Button Input</a>
           <a class="palette_button" href="#" role="button"><img class="img_palette_button" src="../icons/FatCow_Icons32x32/spectrum.png"/>Color Input</a>
@@ -100,13 +109,13 @@
 
       <div class="right_pane">
         <div class="dsWidgetContainer">
-          <div class="dsWidgetContainer">
             <div class="dsWidgetBorder">
              <div class="dsWindow">
                <p class="dsP">Hello World!</p>
              </div>
             </div>
           <div class="dsWidgetNameTag">Hello World Demo</div>
+          <div class="dsWidgetRunButton"><img class="img_run_button" src="../icons/breeze-dark/actions/22/system-run.svg"/></div>
         </div>
       </div>
     </div>
@@ -125,7 +134,6 @@
     <script>
         // global state object 
         var state = parent.state;
-        var loc = GetParameter("loc").toString();
         window.onclick = parent.global_click;
     </script>
   </body>
